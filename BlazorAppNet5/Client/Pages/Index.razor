@@ -1,0 +1,37 @@
+﻿@page "/"
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+<MudButton OnClick="@((e) => {settingsOpen=true;})">Open</MudButton>
+
+<MudDialog @bind-IsVisible="@settingsOpen">
+    <TitleContent>
+        Settings
+    </TitleContent>
+    <DialogContent>
+        <MudSwitch T="bool" Checked="setting" CheckedChanged="SettingChanged">
+            Setting @(setting?"On":"Off")
+        </MudSwitch>
+        <p>
+            @if (error == true)
+            {
+                <span>ERROR!</span>
+            }
+        </p>
+    </DialogContent>
+</MudDialog>
+@code {
+    bool settingsOpen = false;
+    bool setting = false;
+    bool? error = null;
+
+    public void SettingChanged(bool newSetting)
+    {
+        error = true;
+        setting = false;
+    }
+}
